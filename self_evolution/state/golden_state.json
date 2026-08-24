@@ -1,0 +1,25 @@
+{
+  "version": "golden-1",
+  "status": "VALID",
+  "proxy_path": "/content/gpt_oss_proxy_test/surgical_proxy_v2/proxy.py",
+  "golden_proxy": "/content/gpt_oss_proxy_test/self_evolution/backups/golden_proxy.py",
+  "proxy_hash": "f28b3ce8d3e851a9f9b0f3b96f33aa5a4bc4d920934c0aa9b7fceae5139a99e7",
+  "tools": [],
+  "tool_count": 0,
+  "health": {
+    "proxy": false,
+    "ollama": false,
+    "claude": false
+  },
+  "diagnosis": {
+    "root_cause": "UNKNOWN",
+    "confidence": 0.0
+  },
+  "tests": {
+    "syntax": false,
+    "direct_tool": false,
+    "claude_tools": false,
+    "roundtrip": false
+  },
+  "updated_at": "2026-08-24 13:17:46"
+}

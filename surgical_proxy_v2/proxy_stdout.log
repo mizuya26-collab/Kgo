@@ -1,0 +1,7 @@
+Surgical Proxy v5 (recovered) listening on 18082
+ * Serving Flask app 'proxy'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:18082
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [24/Aug/2026 13:17:46] "GET /health HTTP/1.1" 200 -
