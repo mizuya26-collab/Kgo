@@ -1529,7 +1529,13 @@ def select_candidate(
 
     Converts the engine's internal dictionary candidate
     into CandidateCompat for run_engine.py.
+
+    If state is omitted, load the persistent engine state
+    before calling the legacy selector.
     """
+
+    if state is None:
+        state = load_state()
 
     try:
         result = select_candidate_legacy(state)
