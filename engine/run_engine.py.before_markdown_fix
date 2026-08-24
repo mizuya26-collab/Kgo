@@ -1,3 +1,4 @@
+```python
 """
 Kgo
 surgical_proxy_v2
@@ -569,3 +570,4 @@ if __name__ == "__main__":
     raise SystemExit(
         main()
     )
+```
