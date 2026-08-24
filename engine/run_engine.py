@@ -1,0 +1,573 @@
+```python
+"""
+Kgo
+surgical_proxy_v2
+ENGINE RUNNER v1
+
+Purpose:
+    - Load autonomous_engine.py safely
+    - Validate the engine environment
+    - Verify state files
+    - Run a non-destructive dry-run
+    - Never register a fake tool
+    - Never modify Golden State during dry-run
+
+This file is intentionally conservative.
+
+Real tool execution should only be enabled after the
+engine and state recovery path have been verified.
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+
+# ============================================================
+# PATH
+# ============================================================
+
+ROOT = Path(__file__).resolve().parents[1]
+
+ENGINE_DIR = ROOT / "engine"
+STATE_DIR = ROOT / "state"
+BACKUP_DIR = ROOT / "backups"
+
+ENGINE_FILE = ENGINE_DIR / "autonomous_engine.py"
+
+ENGINE_STATE = STATE_DIR / "engine_state.json"
+GOLDEN_STATE = STATE_DIR / "golden_state.json"
+TOOL_REGISTRY = STATE_DIR / "tool_registry.json"
+HISTORY_FILE = STATE_DIR / "evolution_history.jsonl"
+
+
+# ============================================================
+# OUTPUT
+# ============================================================
+
+def line():
+    print("=" * 70)
+
+
+def info(message):
+    print(f"[INFO] {message}")
+
+
+def ok(message):
+    print(f"[OK] {message}")
+
+
+def warn(message):
+    print(f"[WARN] {message}")
+
+
+def fail(message):
+    print(f"[ERROR] {message}")
+
+
+# ============================================================
+# FILE CHECK
+# ============================================================
+
+def check_file(path: Path, required=True):
+
+    if path.exists():
+        ok(str(path))
+        return True
+
+    if required:
+        fail(f"Required file missing: {path}")
+    else:
+        warn(f"Optional file missing: {path}")
+
+    return False
+
+
+# ============================================================
+# JSON CHECK
+# ============================================================
+
+def check_json(path: Path, default):
+
+    if not path.exists():
+        info(
+            f"{path.name} does not exist. "
+            "It will be initialized by the engine when appropriate."
+        )
+        return default
+
+    try:
+
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as f:
+
+            data = json.load(f)
+
+        ok(f"Valid JSON: {path.name}")
+
+        return data
+
+    except Exception as exc:
+
+        fail(
+            f"Invalid JSON: {path.name}: {exc}"
+        )
+
+        return None
+
+
+# ============================================================
+# ENGINE IMPORT
+# ============================================================
+
+def load_engine():
+
+    if not ENGINE_FILE.exists():
+
+        raise RuntimeError(
+            "engine/autonomous_engine.py "
+            "was not found."
+        )
+
+    sys.path.insert(
+        0,
+        str(ENGINE_DIR),
+    )
+
+    try:
+
+        import autonomous_engine
+
+        return autonomous_engine
+
+    except Exception as exc:
+
+        raise RuntimeError(
+            "autonomous_engine.py could not be imported:\n"
+            f"{type(exc).__name__}: {exc}"
+        )
+
+
+# ============================================================
+# STATE REPORT
+# ============================================================
+
+def state_report(
+    engine_state,
+    golden_state,
+    registry,
+):
+
+    line()
+    print("STATE REPORT")
+    line()
+
+    generation = engine_state.get(
+        "generation",
+        0,
+    )
+
+    cycle = engine_state.get(
+        "engine_cycle",
+        0,
+    )
+
+    status = engine_state.get(
+        "status",
+        "UNKNOWN",
+    )
+
+    tools = engine_state.get(
+        "verified_tools",
+        [],
+    )
+
+    quarantined = engine_state.get(
+        "quarantined_tools",
+        [],
+    )
+
+    golden_status = golden_state.get(
+        "status",
+        "UNKNOWN",
+    )
+
+    print(
+        f"Generation       : {generation}"
+    )
+
+    print(
+        f"Engine Cycle     : {cycle}"
+    )
+
+    print(
+        f"Engine Status    : {status}"
+    )
+
+    print(
+        f"Golden State     : {golden_status}"
+    )
+
+    print(
+        f"Verified Tools   : {len(tools)}"
+    )
+
+    print(
+        f"Quarantined      : {len(quarantined)}"
+    )
+
+    print(
+        f"Registry Tools   : "
+        f"{len(registry.get('tools', []))}"
+    )
+
+
+# ============================================================
+# DRY RUN
+# ============================================================
+
+def dry_run(engine):
+
+    line()
+    print("DRY RUN")
+    line()
+
+    info(
+        "No real tool will be registered."
+    )
+
+    info(
+        "No Golden State will be changed."
+    )
+
+    info(
+        "No candidate will be marked VERIFIED."
+    )
+
+    try:
+
+        candidate = (
+            engine.select_next_candidate()
+        )
+
+    except Exception as exc:
+
+        fail(
+            "Candidate selection failed."
+        )
+
+        fail(
+            f"{type(exc).__name__}: {exc}"
+        )
+
+        return False
+
+    if candidate is None:
+
+        info(
+            "No candidate is currently available."
+        )
+
+        return True
+
+    print()
+    print(
+        f"Next Candidate : {candidate.name}"
+    )
+
+    print(
+        f"Risk           : "
+        f"{candidate.risk_level}"
+    )
+
+    print(
+        f"Capabilities   : "
+        f"{candidate.capabilities}"
+    )
+
+    print(
+        f"Expected Marker: "
+        f"{candidate.expected_marker}"
+    )
+
+    print()
+
+    info(
+        "DRY RUN completed."
+    )
+
+    return True
+
+
+# ============================================================
+# MAIN
+# ============================================================
+
+def main():
+
+    line()
+
+    print(
+        " surgical_proxy_v2"
+    )
+
+    print(
+        " ENGINE RUNNER v1"
+    )
+
+    print(
+        " SAFE DRY-RUN MODE"
+    )
+
+    line()
+
+    print(
+        f"ROOT: {ROOT}"
+    )
+
+    print()
+
+    # --------------------------------------------------------
+    # DIRECTORY CHECK
+    # --------------------------------------------------------
+
+    line()
+    print("DIRECTORY CHECK")
+    line()
+
+    ENGINE_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    STATE_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    BACKUP_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    ok("Directory structure ready.")
+
+    # --------------------------------------------------------
+    # ENGINE FILE
+    # --------------------------------------------------------
+
+    line()
+    print("ENGINE CHECK")
+    line()
+
+    if not check_file(
+        ENGINE_FILE,
+        required=True,
+    ):
+
+        return 2
+
+    # --------------------------------------------------------
+    # STATE FILES
+    # --------------------------------------------------------
+
+    line()
+    print("STATE CHECK")
+    line()
+
+    engine_state = check_json(
+        ENGINE_STATE,
+        {},
+    )
+
+    golden_state = check_json(
+        GOLDEN_STATE,
+        {},
+    )
+
+    registry = check_json(
+        TOOL_REGISTRY,
+        {},
+    )
+
+    if engine_state is None:
+        return 3
+
+    if golden_state is None:
+        return 3
+
+    if registry is None:
+        return 3
+
+    # --------------------------------------------------------
+    # ENGINE IMPORT
+    # --------------------------------------------------------
+
+    line()
+    print("ENGINE IMPORT")
+    line()
+
+    try:
+
+        engine = load_engine()
+
+        ok(
+            "autonomous_engine.py "
+            "loaded successfully."
+        )
+
+    except Exception as exc:
+
+        fail(
+            str(exc)
+        )
+
+        return 4
+
+    # --------------------------------------------------------
+    # ENGINE STATUS
+    # --------------------------------------------------------
+
+    line()
+    print("ENGINE STATUS")
+    line()
+
+    try:
+
+        status = (
+            engine.engine_status()
+        )
+
+        print(
+            json.dumps(
+                status,
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+
+    except Exception as exc:
+
+        fail(
+            "Could not read engine status."
+        )
+
+        fail(
+            f"{type(exc).__name__}: {exc}"
+        )
+
+        return 5
+
+    # --------------------------------------------------------
+    # STATE REPORT
+    # --------------------------------------------------------
+
+    state_report(
+        engine_state,
+        golden_state,
+        registry,
+    )
+
+    # --------------------------------------------------------
+    # GOLDEN VALIDATION
+    # --------------------------------------------------------
+
+    line()
+    print("GOLDEN STATE CHECK")
+    line()
+
+    try:
+
+        golden_valid = (
+            engine.validate_golden_state()
+        )
+
+    except Exception as exc:
+
+        fail(
+            "Golden State validation failed."
+        )
+
+        fail(
+            f"{type(exc).__name__}: {exc}"
+        )
+
+        return 6
+
+    print(
+        f"Golden Valid : {golden_valid}"
+    )
+
+    if not golden_valid:
+
+        warn(
+            "Golden State is not VALID."
+        )
+
+        warn(
+            "Real evolution is blocked."
+        )
+
+    else:
+
+        ok(
+            "Golden State is VALID."
+        )
+
+    # --------------------------------------------------------
+    # DRY RUN
+    # --------------------------------------------------------
+
+    if not dry_run(engine):
+
+        fail(
+            "Dry run failed."
+        )
+
+        return 7
+
+    # --------------------------------------------------------
+    # FINAL
+    # --------------------------------------------------------
+
+    line()
+    print(
+        "ENGINE RUNNER COMPLETE"
+    )
+    line()
+
+    print(
+        "Result : SAFE"
+    )
+
+    print(
+        "Mode   : DRY RUN"
+    )
+
+    print(
+        "Real evolution : NOT EXECUTED"
+    )
+
+    print(
+        "Tool registration: NOT EXECUTED"
+    )
+
+    print(
+        "Golden State modification: NOT EXECUTED"
+    )
+
+    line()
+
+    return 0
+
+
+if __name__ == "__main__":
+
+    raise SystemExit(
+        main()
+    )
+```
