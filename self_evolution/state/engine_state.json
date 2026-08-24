@@ -1,0 +1,21 @@
+{
+  "version": "engine-v5",
+  "generation": 0,
+  "engine_cycle": 0,
+  "metrics": {
+    "tool_attempts": 0,
+    "tool_successes": 0,
+    "tool_failures": 0,
+    "repair_attempts": 0,
+    "repair_successes": 0,
+    "evolution_attempts": 0,
+    "evolution_successes": 0
+  },
+  "verified_tools": [],
+  "quarantined_tools": [],
+  "last_candidate": null,
+  "last_evolution_id": null,
+  "last_status": null,
+  "created_at": "2026-08-24 13:07:01",
+  "updated_at": "2026-08-24 13:07:01"
+}
