@@ -1,21 +1,44 @@
 {
   "version": "engine-v5",
-  "generation": 0,
-  "engine_cycle": 0,
+  "generation": 1,
+  "engine_cycle": 1,
   "metrics": {
-    "tool_attempts": 0,
-    "tool_successes": 0,
+    "tool_attempts": 1,
+    "tool_successes": 1,
     "tool_failures": 0,
     "repair_attempts": 0,
     "repair_successes": 0,
     "evolution_attempts": 0,
-    "evolution_successes": 0
+    "evolution_successes": 1
   },
-  "verified_tools": [],
+  "verified_tools": [
+    {
+      "name": "Glob",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "file_pattern_search"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-24 13:47:17",
+      "validation": {
+        "tool": "Glob",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    }
+  ],
   "quarantined_tools": [],
-  "last_candidate": null,
-  "last_evolution_id": null,
-  "last_status": null,
+  "last_candidate": "Glob",
+  "last_evolution_id": "EV5-0001-Glob-20260824134717",
+  "last_status": "VERIFIED",
   "created_at": "2026-08-24 13:07:01",
-  "updated_at": "2026-08-24 13:30:28"
+  "updated_at": "2026-08-24 13:47:17"
 }

@@ -4,8 +4,31 @@
   "proxy_path": "/content/gpt_oss_proxy_test/surgical_proxy_v2/proxy.py",
   "golden_proxy": "/content/gpt_oss_proxy_test/self_evolution/backups/golden_proxy.py",
   "proxy_hash": "f28b3ce8d3e851a9f9b0f3b96f33aa5a4bc4d920934c0aa9b7fceae5139a99e7",
-  "tools": [],
-  "tool_count": 0,
+  "tools": [
+    {
+      "name": "Glob",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "file_pattern_search"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-24 13:47:17",
+      "validation": {
+        "tool": "Glob",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    }
+  ],
+  "tool_count": 1,
   "health": {
     "proxy": false,
     "ollama": false,
