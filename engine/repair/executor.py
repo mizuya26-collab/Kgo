@@ -199,4 +199,8 @@ def run_executor(project_path: Path, plan_path: Optional[Path] = None) -> Path:
 
     print()
     print("Execution log saved:", out_path)
+
+    from engine.learning.experience_memory import record_execution
+    record_execution(project_path, out_path)
+
     return out_path

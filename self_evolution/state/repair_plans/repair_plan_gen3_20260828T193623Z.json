@@ -1,0 +1,92 @@
+{
+  "actions": [
+    {
+      "component": "python",
+      "classification": "HEALTHY",
+      "root_cause": "N/A",
+      "planned_action": "NONE",
+      "confidence": 1.0,
+      "risk_class": "NONE",
+      "requires_human_approval": false,
+      "execution_allowed": false,
+      "detail": "3.13.15"
+    },
+    {
+      "component": "git",
+      "classification": "HEALTHY",
+      "root_cause": "N/A",
+      "planned_action": "NONE",
+      "confidence": 1.0,
+      "risk_class": "NONE",
+      "requires_human_approval": false,
+      "execution_allowed": false,
+      "detail": "git version 2.34.1"
+    },
+    {
+      "component": "claude_cli",
+      "classification": "MISSING",
+      "root_cause": "TOOL_NOT_ON_PATH",
+      "planned_action": "INSTALL_OR_CONFIGURE_PATH",
+      "confidence": 0.9,
+      "risk_class": "DEPENDENCY_INSTALL",
+      "requires_human_approval": true,
+      "execution_allowed": false,
+      "detail": "claude executable not found on PATH"
+    },
+    {
+      "component": "ollama",
+      "classification": "SERVICE_DOWN",
+      "root_cause": "PROXY_UNREACHABLE",
+      "planned_action": "START_SERVICE",
+      "confidence": 0.6,
+      "risk_class": "SERVICE_START",
+      "requires_human_approval": true,
+      "execution_allowed": false,
+      "detail": "<urlopen error [Errno 111] Connection refused>"
+    },
+    {
+      "component": "proxy_process",
+      "classification": "SERVICE_DOWN",
+      "root_cause": "PROXY_UNREACHABLE",
+      "planned_action": "START_SERVICE",
+      "confidence": 0.6,
+      "risk_class": "SERVICE_START",
+      "requires_human_approval": true,
+      "execution_allowed": false,
+      "detail": "proxy port 18082: closed (errno=111)"
+    },
+    {
+      "component": "golden_proxy",
+      "classification": "HEALTHY",
+      "root_cause": "N/A",
+      "planned_action": "NONE",
+      "confidence": 1.0,
+      "risk_class": "NONE",
+      "requires_human_approval": false,
+      "execution_allowed": false,
+      "detail": "matches golden"
+    },
+    {
+      "component": "engine_state",
+      "classification": "HEALTHY",
+      "root_cause": "N/A",
+      "planned_action": "NONE",
+      "confidence": 1.0,
+      "risk_class": "NONE",
+      "requires_human_approval": false,
+      "execution_allowed": false,
+      "detail": "generation=1"
+    },
+    {
+      "component": "tool_registry",
+      "classification": "HEALTHY",
+      "root_cause": "N/A",
+      "planned_action": "NONE",
+      "confidence": 1.0,
+      "risk_class": "NONE",
+      "requires_human_approval": false,
+      "execution_allowed": false,
+      "detail": "loaded"
+    }
+  ]
+}

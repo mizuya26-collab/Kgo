@@ -1,0 +1,16 @@
+{
+  "request_id": "001_9c127778",
+  "timestamp": 1787946065.9137006,
+  "model": "gpt-oss:20b",
+  "reduce_tools": true,
+  "allowed_tools_env": [
+    "Bash"
+  ],
+  "original_tool_names": [],
+  "caps_applied": {
+    "max_tokens_after": 200,
+    "thinking_after": null,
+    "temperature_after": null,
+    "speed_suffix_on": false
+  }
+}

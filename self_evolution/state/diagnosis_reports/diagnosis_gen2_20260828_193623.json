@@ -1,0 +1,181 @@
+{
+  "generation": 2,
+  "timestamp": 1787945783.8212907,
+  "results": [
+    {
+      "component": "python",
+      "classification": "HEALTHY",
+      "root_cause_category": "UNKNOWN",
+      "root_cause": "N/A",
+      "confidence": 1.0,
+      "repairable": false,
+      "recommended_action": "NONE",
+      "detail": "3.13.15",
+      "evidence": {
+        "version": "3.13.15 (main, Aug  6 2026, 11:06:23) [GCC 11.4.0]",
+        "executable": "/usr/bin/python3"
+      }
+    },
+    {
+      "component": "git",
+      "classification": "HEALTHY",
+      "root_cause_category": "UNKNOWN",
+      "root_cause": "N/A",
+      "confidence": 1.0,
+      "repairable": false,
+      "recommended_action": "NONE",
+      "detail": "git version 2.34.1",
+      "evidence": {
+        "returncode": 0
+      }
+    },
+    {
+      "component": "claude_cli",
+      "classification": "MISSING",
+      "root_cause_category": "DEPENDENCY",
+      "root_cause": "TOOL_NOT_ON_PATH",
+      "confidence": 0.9,
+      "repairable": true,
+      "recommended_action": "INSTALL_OR_CONFIGURE_PATH",
+      "detail": "claude executable not found on PATH",
+      "evidence": {}
+    },
+    {
+      "component": "ollama",
+      "classification": "SERVICE_DOWN",
+      "root_cause_category": "SERVICE",
+      "root_cause": "PROXY_UNREACHABLE",
+      "confidence": 0.6,
+      "repairable": true,
+      "recommended_action": "START_SERVICE",
+      "detail": "<urlopen error [Errno 111] Connection refused>",
+      "evidence": {
+        "endpoint": "http://127.0.0.1:11434/api/tags"
+      }
+    },
+    {
+      "component": "proxy_process",
+      "classification": "SERVICE_DOWN",
+      "root_cause_category": "SERVICE",
+      "root_cause": "PROXY_UNREACHABLE",
+      "confidence": 0.6,
+      "repairable": true,
+      "recommended_action": "START_SERVICE",
+      "detail": "proxy port 18082: closed (errno=111)",
+      "evidence": {
+        "host": "127.0.0.1",
+        "port": 18082
+      }
+    },
+    {
+      "component": "golden_proxy",
+      "classification": "HEALTHY",
+      "root_cause_category": "UNKNOWN",
+      "root_cause": "N/A",
+      "confidence": 1.0,
+      "repairable": false,
+      "recommended_action": "NONE",
+      "detail": "matches golden",
+      "evidence": {
+        "proxy_sha256": "f28b3ce8d3e851a9f9b0f3b96f33aa5a4bc4d920934c0aa9b7fceae5139a99e7",
+        "golden_sha256": "f28b3ce8d3e851a9f9b0f3b96f33aa5a4bc4d920934c0aa9b7fceae5139a99e7"
+      }
+    },
+    {
+      "component": "engine_state",
+      "classification": "HEALTHY",
+      "root_cause_category": "UNKNOWN",
+      "root_cause": "N/A",
+      "confidence": 1.0,
+      "repairable": false,
+      "recommended_action": "NONE",
+      "detail": "generation=1",
+      "evidence": {
+        "data": {
+          "version": "engine-v5",
+          "generation": 1,
+          "engine_cycle": 1,
+          "metrics": {
+            "tool_attempts": 1,
+            "tool_successes": 1,
+            "tool_failures": 0,
+            "repair_attempts": 0,
+            "repair_successes": 0,
+            "evolution_attempts": 0,
+            "evolution_successes": 1
+          },
+          "verified_tools": [
+            {
+              "name": "Glob",
+              "version": "autonomous-engine-v5",
+              "status": "VERIFIED",
+              "risk_level": "low",
+              "capabilities": [
+                "file_pattern_search"
+              ],
+              "verified": true,
+              "source": "autonomous_engine_v5",
+              "verified_at": "2026-08-24 13:47:17",
+              "validation": {
+                "tool": "Glob",
+                "returncode_ok": true,
+                "marker_found": true,
+                "unavailable_detected": false,
+                "actual_invocation": true,
+                "artifact_ok": true,
+                "verified": true,
+                "reason": null
+              }
+            }
+          ],
+          "quarantined_tools": [],
+          "last_candidate": "Glob",
+          "last_evolution_id": "EV5-0001-Glob-20260824134717",
+          "last_status": "VERIFIED",
+          "created_at": "2026-08-24 13:07:01",
+          "updated_at": "2026-08-24 13:47:17"
+        }
+      }
+    },
+    {
+      "component": "tool_registry",
+      "classification": "HEALTHY",
+      "root_cause_category": "UNKNOWN",
+      "root_cause": "N/A",
+      "confidence": 1.0,
+      "repairable": false,
+      "recommended_action": "NONE",
+      "detail": "loaded",
+      "evidence": {
+        "data": {
+          "version": "registry-v1",
+          "tools": [
+            {
+              "name": "Glob",
+              "version": "autonomous-engine-v5",
+              "status": "VERIFIED",
+              "risk_level": "low",
+              "capabilities": [
+                "file_pattern_search"
+              ],
+              "verified": true,
+              "source": "autonomous_engine_v5",
+              "verified_at": "2026-08-24 13:47:17",
+              "validation": {
+                "tool": "Glob",
+                "returncode_ok": true,
+                "marker_found": true,
+                "unavailable_detected": false,
+                "actual_invocation": true,
+                "artifact_ok": true,
+                "verified": true,
+                "reason": null
+              }
+            }
+          ],
+          "updated_at": "2026-08-24 13:17:46"
+        }
+      }
+    }
+  ]
+}

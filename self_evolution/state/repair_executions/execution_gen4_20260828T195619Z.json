@@ -1,0 +1,45 @@
+{
+  "plan_file": "/content/gpt_oss_proxy_test/self_evolution/state/repair_plans/repair_plan_gen3_20260828T195619Z.json",
+  "executions": [
+    {
+      "component": "python",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "git",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "claude_cli",
+      "planned_action": "INSTALL_OR_CONFIGURE_PATH",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "ollama",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "proxy_process",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "golden_proxy",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "engine_state",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "tool_registry",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    }
+  ]
+}

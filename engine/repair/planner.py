@@ -26,7 +26,7 @@ def load_diagnosis_report(report_path: Path) -> dict:
     return data
 
 
-def build_repair_plan(report: dict) -> List[RepairAction]:
+def build_repair_plan(report: dict, project_path: Path | None = None) -> List[RepairAction]:
     actions = []
     for result in report["results"]:
         if result.get("classification") == "HEALTHY":
@@ -43,16 +43,25 @@ def build_repair_plan(report: dict) -> List[RepairAction]:
             )
         else:
             policy = resolve_policy(result.get("root_cause", "UNKNOWN"))
+            planned_action = result.get("recommended_action", "NONE")
+
+            detail_text = result.get("detail", "")
+            if project_path is not None:
+                from engine.learning.experience_memory import annotate_action_with_history
+                history = annotate_action_with_history(project_path, result["component"], planned_action)
+                if history["escalate_to_human"]:
+                    detail_text += f" [履歴警告] {history['note']}"
+
             action = RepairAction(
                 component=result["component"],
                 classification=result["classification"],
                 root_cause=result.get("root_cause", "UNKNOWN"),
-                planned_action=result.get("recommended_action", "NONE"),
+                planned_action=planned_action,
                 confidence=result.get("confidence", 0.0),
                 risk_class=policy.risk_class,
                 requires_human_approval=policy.requires_human_approval,
                 execution_allowed=False,  # Gen3は計画のみ。実行は一切しない。
-                detail=result.get("detail", ""),
+                detail=detail_text,
             )
         actions.append(action)
     return actions

@@ -1,0 +1,61 @@
+{
+  "plan_file": "/content/gpt_oss_proxy_test/self_evolution/state/repair_plans/repair_plan_gen3_20260828T193623Z.json",
+  "executions": [
+    {
+      "component": "python",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "git",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "claude_cli",
+      "planned_action": "INSTALL_OR_CONFIGURE_PATH",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "ollama",
+      "planned_action": "START_SERVICE",
+      "status": "EXECUTED_BUT_VERIFICATION_FAILED",
+      "run_result": {
+        "started": false,
+        "error": "ollama executable not found: [Errno 2] No such file or directory: 'ollama'"
+      },
+      "verify_result": {
+        "ok": false,
+        "detail": "<urlopen error [Errno 111] Connection refused>"
+      }
+    },
+    {
+      "component": "proxy_process",
+      "planned_action": "START_SERVICE",
+      "status": "SUCCESS",
+      "run_result": {
+        "started": true,
+        "error": null
+      },
+      "verify_result": {
+        "ok": true,
+        "detail": "HTTP 200 from http://127.0.0.1:18082/health"
+      }
+    },
+    {
+      "component": "golden_proxy",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "engine_state",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    },
+    {
+      "component": "tool_registry",
+      "planned_action": "NONE",
+      "status": "SKIPPED_NOT_IN_ALLOWLIST"
+    }
+  ]
+}
