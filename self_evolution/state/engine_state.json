@@ -1,15 +1,15 @@
 {
   "version": "engine-v5",
-  "generation": 1,
-  "engine_cycle": 1,
+  "generation": 6,
+  "engine_cycle": 6,
   "metrics": {
-    "tool_attempts": 1,
-    "tool_successes": 1,
+    "tool_attempts": 6,
+    "tool_successes": 6,
     "tool_failures": 0,
     "repair_attempts": 0,
     "repair_successes": 0,
     "evolution_attempts": 0,
-    "evolution_successes": 1
+    "evolution_successes": 6
   },
   "verified_tools": [
     {
@@ -33,12 +33,122 @@
         "verified": true,
         "reason": null
       }
+    },
+    {
+      "name": "Grep",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "content_search"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Grep",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Bash",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "shell_command_execution"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Bash",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Read",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "file_read"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Read",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Write",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "file_write"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Write",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Edit",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "file_edit"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Edit",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
     }
   ],
   "quarantined_tools": [],
-  "last_candidate": "Glob",
-  "last_evolution_id": "EV5-0001-Glob-20260824134717",
+  "last_candidate": "Edit",
+  "last_evolution_id": "EV5-0006-Edit-20260828202501",
   "last_status": "VERIFIED",
   "created_at": "2026-08-24 13:07:01",
-  "updated_at": "2026-08-24 13:47:17"
+  "updated_at": "2026-08-28 20:25:01"
 }

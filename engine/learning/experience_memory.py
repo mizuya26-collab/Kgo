@@ -59,8 +59,10 @@ def get_action_stats(project_path: Path, component: str, planned_action: str) ->
         if r.get("component") == component and r.get("planned_action") == planned_action
     ]
 
-    attempts = len(relevant)
-    successes = sum(1 for r in relevant if r.get("status") == "SUCCESS")
+    # SKIPPED_NOT_IN_ALLOWLIST(実行を試みていない)を分母から除外する
+    attempted_for_stats = [r for r in relevant if r.get("status") != "SKIPPED_NOT_IN_ALLOWLIST"]
+    attempts = len(attempted_for_stats)
+    successes = sum(1 for r in attempted_for_stats if r.get("status") == "SUCCESS")
     failures = attempts - successes
 
     # SKIPPED_NOT_IN_ALLOWLIST は「実行を試みていない」だけなので、

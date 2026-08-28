@@ -22,6 +22,116 @@
         "verified": true,
         "reason": null
       }
+    },
+    {
+      "name": "Grep",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "content_search"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Grep",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Bash",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "shell_command_execution"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Bash",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Read",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "low",
+      "capabilities": [
+        "file_read"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Read",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Write",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "file_write"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Write",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "Edit",
+      "version": "autonomous-engine-v5",
+      "status": "VERIFIED",
+      "risk_level": "medium",
+      "capabilities": [
+        "file_edit"
+      ],
+      "verified": true,
+      "source": "autonomous_engine_v5",
+      "verified_at": "2026-08-28 20:25:01",
+      "validation": {
+        "tool": "Edit",
+        "returncode_ok": true,
+        "marker_found": true,
+        "unavailable_detected": false,
+        "actual_invocation": true,
+        "artifact_ok": true,
+        "verified": true,
+        "reason": null
+      }
     }
   ],
   "updated_at": "2026-08-24 13:17:46"

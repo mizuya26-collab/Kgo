@@ -798,10 +798,32 @@ def validate_candidate(
 
     if name == "Glob":
 
-        result["actual_invocation"] = True
-        result["marker_found"] = True
-        result["artifact_ok"] = True
-        result["returncode_ok"] = True
+        import glob as glob_module
+
+        marker_dir = ENGINE_DIR / "glob_validation"
+        marker_dir.mkdir(parents=True, exist_ok=True)
+        marker_file = marker_dir / "AUTONOMOUS_GLOB_VALIDATION.marker"
+
+        try:
+            marker_file.write_text("glob_check", encoding="utf-8")
+
+            pattern = str(marker_dir / "*.marker")
+            found = glob_module.glob(pattern)
+
+            result["actual_invocation"] = True
+            result["returncode_ok"] = True
+            result["marker_found"] = str(marker_file) in found
+            result["artifact_ok"] = result["marker_found"]
+
+        except Exception as exc:
+            result["reason"] = str(exc)
+
+        finally:
+            try:
+                marker_file.unlink()
+            except Exception:
+                pass
+
 
     elif name == "Grep":
 
@@ -1330,13 +1352,21 @@ def evolution_cycle(
     # RECORD
     # --------------------------------------------------------
 
+    # candidate は CandidateCompat の場合があり、そのままではJSON化できないため、
+    # 辞書に変換してから記録する。
+    candidate_for_record = (
+        candidate.to_dict()
+        if hasattr(candidate, "to_dict")
+        else candidate
+    )
+
     history = {
         "timestamp": now(),
         "evolution_id": evolution_id,
         "generation": state[
             "generation"
         ],
-        "candidate": candidate,
+        "candidate": candidate_for_record,
         "validation": validation,
     }
 
