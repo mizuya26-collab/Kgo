@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+self_evolution/state/diagnosis_reports/
+self_evolution/state/repair_plans/
+self_evolution/state/repair_executions/
