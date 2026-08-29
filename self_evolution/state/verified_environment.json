@@ -1,0 +1,43 @@
+{
+  "verified_at": "2026-08-29T04:40:09.867833+00:00",
+  "verified_on_commit": "86a1d5d",
+  "summary": "Claude Code -> Ollama直結でBash Tool Useが正常動作することを確認した設定",
+  "critical_findings": [
+    "OllamaはANTHROPIC_BASE_URL/ANTHROPIC_AUTH_TOKEN経由でClaude Codeと直結可能(公式サポート、Surgical Proxy不要)",
+    "Ollamaインストール前に pciutils/lshw を入れないとGPU未検出でCPU動作になる",
+    "OLLAMA_CONTEXT_LENGTHのデフォルト(4096)ではClaude Codeのツール定義を含む会話が切り捨てられ、指示が無視される",
+    "gpt-oss:20bはClaude Codeの認識モデルリストに無く、CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1が必要",
+    "gpt-oss:20bの初回モデルロードには約90秒〜2分かかる。それより短いタイムアウトは誤ってハング/失敗と判断される"
+  ],
+  "required_install_order": [
+    "1. apt-get install -y zstd",
+    "2. apt-get install -y pciutils lshw  (Ollamaより先に。GPU検出のため)",
+    "3. curl -fsSL https://ollama.com/install.sh | sh",
+    "4. ollama serve  (環境変数 OLLAMA_CONTEXT_LENGTH=16384 を付与)",
+    "5. ollama pull gpt-oss:20b",
+    "6. curl -fsSL https://claude.ai/install.sh | bash  (Claude Code, Node.js不要)"
+  ],
+  "required_env_vars": {
+    "ollama_serve": {
+      "OLLAMA_CONTEXT_LENGTH": "16384"
+    },
+    "claude_code": {
+      "ANTHROPIC_BASE_URL": "http://127.0.0.1:11434",
+      "ANTHROPIC_AUTH_TOKEN": "ollama",
+      "ANTHROPIC_API_KEY": "",
+      "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT": "1"
+    }
+  },
+  "verified_working_example": {
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "gpt-oss:20b",
+      "pwdコマンドを実行して、現在のディレクトリを教えてください"
+    ],
+    "result": "The current working directory is: /content/gpt_oss_proxy_test",
+    "confirmed_gpu_usage": "100% GPU, CONTEXT 16384 (via `ollama ps`)"
+  },
+  "open_question": "Surgical Proxy v2は今後も使うか、Ollama直結に一本化するか未決定"
+}
