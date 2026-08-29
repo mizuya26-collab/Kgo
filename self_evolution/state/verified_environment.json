@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-29T04:40:09.867833+00:00",
+  "verified_at": "2026-08-29T04:41:16.768626+00:00",
   "verified_on_commit": "86a1d5d",
   "summary": "Claude Code -> Ollama直結でBash Tool Useが正常動作することを確認した設定",
   "critical_findings": [
